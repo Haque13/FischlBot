@@ -9,7 +9,7 @@ const PREFIX = "f";
 
 bot.on("ready", () => {
     console.log(`[READY] ${bot.user.tag} has been successfully booted up!`)
-    bot.user.setActivity("a music for you!🎶 | type bhelp for command list")
+    bot.user.setActivity("in the darkness!")
   });
 bot.on("warn", console.warn);
 bot.on("error", console.error);
@@ -28,7 +28,7 @@ bot.on("message", async (message) => { // eslint-disable-line
 
     if (message.content.startsWith(PREFIX+'avatar')) {
         const user = message.mentions.users.first() || message.author;
-        const avatarEmbed = new Discord.RichEmbed()
+        const Discord.RichEmbed() = new avatarEmbed
             .setColor(0x333333)
             .setAuthor(user.username)
             .setImage(user.avatarURL);
