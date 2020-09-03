@@ -26,7 +26,7 @@ bot.on("message", async (message) => { // eslint-disable-line
     let command = message.content.toLowerCase().split(" ")[0];
     command = command.slice(PREFIX.length);
 
-    if (message.content.startsWith(PREFIX + 'avatar')) {
+    if (message.content.startsWith('avatar')) {
     
         let embed = new MessageEmbed();
     if(!message.mentions.users.first()) {
@@ -47,7 +47,6 @@ bot.on("message", async (message) => { // eslint-disable-line
         embed.setImage(bot.users.cache.get(user.id).displayAvatarURL({size: 2048, dynamic: true}));
         message.channel.send(embed)};
     } else {
-        if(message.mentions.users)
         message.channel.send("Maaf, aku tidak mempunyai cukup kekuatan untuk memanggil Avatar orang itu")};    
 })
 
