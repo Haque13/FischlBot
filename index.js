@@ -31,7 +31,7 @@ bot.on("message", async (message) => { // eslint-disable-line
         let embed = new MessageEmbed();
     if(!message.mentions.users.first()) {
         embed.setTitle('Your avatar');
-        embed.setDescription('Aku memanggil nya dari alam kegelapan')(`Links:\n[png](${message.author.displayAvatarURL({format: "png", size: 2048})}) | [jpg](${message.author.displayAvatarURL({format: "jpg", size: 2048})}) | [gif](${message.author.displayAvatarURL({format: "gif", size: 2048, dynamic: true})}) | [webp](${message.author.displayAvatarURL({format: "webp", size: 2048})})`);
+        embed.setDescription('Aku memanggil nya dari alam kegelapan') | (`Links:\n[png](${message.author.displayAvatarURL({format: "png", size: 2048})}) | [jpg](${message.author.displayAvatarURL({format: "jpg", size: 2048})}) | [gif](${message.author.displayAvatarURL({format: "gif", size: 2048, dynamic: true})}) | [webp](${message.author.displayAvatarURL({format: "webp", size: 2048})})`);
         embed.setColor(0x00008b);
         embed.setTimestamp();
         embed.setFooter(message.author.username);
