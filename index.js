@@ -32,7 +32,7 @@ bot.on("message", async (message) => { // eslint-disable-line
     if(!message.mentions.users.first()) {
         embed.setTitle('Your avatar');
         embed.setDescription('Dengan kontrak ini, aku memanggil Avatar mu dari alam kegelapan!') | (`Links:\n[png](${message.author.displayAvatarURL({format: "png", size: 2048})}) | [jpg](${message.author.displayAvatarURL({format: "jpg", size: 2048})}) | [gif](${message.author.displayAvatarURL({format: "gif", size: 2048, dynamic: true})}) | [webp](${message.author.displayAvatarURL({format: "webp", size: 2048})})`);
-        embed.setColor(PURPLE);
+        embed.setColor(0x4B0082);
         embed.setTimestamp();
         embed.setFooter(message.author.username);
         embed.setImage(message.author.displayAvatarURL({size: 2048, dynamic: true}));
@@ -41,7 +41,7 @@ bot.on("message", async (message) => { // eslint-disable-line
         let user = message.mentions.users.first();
         embed.setTitle(`${user.username}'s avatar`);
         embed.setDescription('Aku berhasil menemukan Avatar nya!') | (`Links:\n[png](${user.displayAvatarURL({format: "png", size: 2048})}) | [jpg](${user.displayAvatarURL({format: "jpg", size: 2048})}) | [gif](${user.displayAvatarURL({format: "gif", size: 2048, dynamic: true})}) | [webp](${user.displayAvatarURL({format: "webp", size: 2048})})`);
-        embed.setColor(PURPLE);
+        embed.setColor(0x4B0082);
         embed.setTimestamp();
         embed.setFooter(user.username);
         embed.setImage(bot.users.cache.get(user.id).displayAvatarURL({size: 2048, dynamic: true}));
