@@ -7,7 +7,8 @@ const bot = new Client({
 
 const prefix1 = "f";
 const prefix2 = "fischl";
-const guild = bot.guilds.get("691557706846306385");
+const count = new Commando.Client({commandPrefix: '$'});
+const guild = count.guilds.get("691557706846306385");
 const MIN_INTERVAL = 3 * 1000;
 
 bot.registry.registerGroup('connectc', 'Connectc');
@@ -21,7 +22,7 @@ bot.on("ready", () => {
     bot.user.setActivity("in the darkness!")
     setInterval(function(){
         var memberCount = guild.members.filter(member => !member.user.bot).size;
-        var memberCountChannel = bot.channels.get("751113088174129182");
+        var memberCountChannel = count.channels.get("751113088174129182");
         memberCountChannel.setName("👤Haque: "+ memberCount +" 👤");
     }, MIN_INTERVAL);
   });
