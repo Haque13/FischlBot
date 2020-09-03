@@ -272,7 +272,7 @@ __**Command list**__
     }
     return message.channel.send("Aku tidak sedang bernyanyi! hmph!~ 😤");
   
-  } else if (message.content.startsWith(config.prefix + 'avatar')) {
+  } else if (message.content.startsWith(PREFIX + 'avatar')) {
     const user = message.mentions.users.first() || message.author;
     const avatarEmbed = new Discord.RichEmbed()
         .setColor(0x333333)
