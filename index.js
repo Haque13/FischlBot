@@ -7,10 +7,16 @@ const bot = new Client({
 
 const prefix1 = "f";
 const prefix2 = "fischl";
+const guild = bot.guilds.get("691557706846306385");
 
 bot.on("ready", () => {
     console.log(`[READY] ${bot.user.tag} has been successfully booted up!`)
     bot.user.setActivity("in the darkness!")
+    setInterval(function(){
+        var memberCount = guild.members.filter(member => !member.user.bot).size;
+        var memberCountChannel = bot.channels.get("751113088174129182");
+        memberCountChannel.setName("👤Haque: "+ memberCount +" 👤");
+    }, MIN_INTERVAL);
   });
 bot.on("warn", console.warn);
 bot.on("error", console.error);
