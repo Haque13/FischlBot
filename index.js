@@ -47,7 +47,7 @@ bot.on("message", async (message) => { // eslint-disable-line
         embed.setImage(bot.users.cache.get(user.id).displayAvatarURL({size: 2048, dynamic: true}));
         message.channel.send(embed)};
     } else {
-        if(!message.mentions.users)
+        if(message.mentions.users)
         message.channel.send("Maaf, aku tidak mempunyai cukup kekuatan untuk memanggil Avatar orang itu")};    
 })
 
