@@ -214,7 +214,7 @@ msg.reply("", {embed: {
 };
 
 client.on('ready', () => {
- client.user.setGame(`Custom playlists! s.help | s.invite`, 'https://www.twitch.tv/imaqtpie');
+ client.user.setActivity('in the darkness!');
  console.log(`${name} bot online and ready!`);
 });
 

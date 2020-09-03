@@ -6,17 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Haque13/FischlBot"
-  },
-  "author": "Wonder & Toast",
-  "license": "MIT",
+  "author": "Haque",
+  "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.1.0",
-    "fs": "0.0.1-security",
-    "performance-now": "^2.1.0",
-    "youtube-node": "^1.3.0",
-    "ytdl-core": "^0.14.4"
+    "avconv": "^3.1.0",
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "ffmpeg": "^0.0.4",
+    "opusscript": "0.0.7",
+    "server.js": "^1.0.0",
+    "simple-youtube-api": "^5.2.1",
+    "ytdl-core": "^3.2.1"
   }
 }
