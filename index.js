@@ -271,7 +271,19 @@ __**Command list**__
       );
     }
     return message.channel.send("Aku tidak sedang bernyanyi! hmph!~ 😤");
-  }
+  
+  } else if (command === 'avatar') {
+    if (args[0]) {
+      const user = getUserFromMention(args[0]);
+      if (!user) {
+        return message.reply('Please use a proper mention if you want to see someone else\'s avatar.');
+      }
+  
+      return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL({ dynamic: true })}`);
+    }
+  
+    return message.channel.send(`${message.author.username}, your avatar: ${message.author.displayAvatarURL({ dynamic: true })}`);
+  } 
 });
 
 async function handleVideo(video, message, voiceChannel, playlist = false) {
@@ -318,6 +330,20 @@ async function handleVideo(video, message, voiceChannel, playlist = false) {
   return;
 }
 
+function getUserFromMention(mention) {
+	if (!mention) return;
+
+	if (mention.startsWith('<@') && mention.endsWith('>')) {
+		mention = mention.slice(2, -1);
+
+		if (mention.startsWith('!')) {
+			mention = mention.slice(1);
+		}
+
+		return client.users.cache.get(mention);
+	}
+}
+
 function play(guild, song) {
   const serverQueue = queue.get(guild.id);
 
@@ -362,31 +388,5 @@ var listener = app.listen(process.env.PORT || 8000, function () {
     console.log("Your app is listening on port " + listener.address().port);
 });
 
-function getUserFromMention(mention) {
-	if (!mention) return;
-
-	if (mention.startsWith('<@') && mention.endsWith('>')) {
-		mention = mention.slice(2, -1);
-
-		if (mention.startsWith('!')) {
-			mention = mention.slice(1);
-		}
-
-		return client.users.cache.get(mention);
-	}
-}
-
-if (command === 'avatar') {
-	if (args[0]) {
-		const user = getUserFromMention(args[0]);
-		if (!user) {
-			return message.reply('Please use a proper mention if you want to see someone else\'s avatar.');
-		}
-
-		return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL({ dynamic: true })}`);
-	}
-
-	return message.channel.send(`${message.author.username}, your avatar: ${message.author.displayAvatarURL({ dynamic: true })}`);
-}
 
 bot.login(process.env.BOT_TOKEN);
