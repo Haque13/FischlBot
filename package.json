@@ -1,7 +1,7 @@
 {
-  "name": "spotify",
+  "name": "fischl",
   "version": "1.0.0",
-  "description": "A Discord Bot to save and play user's playlist into other guilds",
+  "description": "a bot from the darkness!",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
