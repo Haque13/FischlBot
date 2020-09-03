@@ -31,7 +31,7 @@ bot.on("message", async (message) => { // eslint-disable-line
         {
         let embed = new MessageEmbed();
     if(!message.mentions.users.first()) {
-        message.channel.send("Maaf, aku tidak mempunyai cukup kekuatan untuk memanggil Avatar itu")
+        message.channel.send("Aku tidak bisa melakukan pemanggilan, jika tidak mengetahui siapa yg harus ku panggil!")
     } else {
         let user = message.mentions.users.first();
         embed.setTitle(`${user.username}'s avatar`);
