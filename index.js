@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const yt = require('ytdl-core');
 const fs = require('fs');
 const now = require('performance-now');
+const { d_token, yt_token, name, oauth, prefix, passes } = require('./config.json');
 const YouTube = require('youtube-node');
 const youTube = new YouTube();
 youTube.setKey(yt_token);
