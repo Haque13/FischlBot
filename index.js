@@ -7,7 +7,7 @@ const bot = new Client({
     disableMentions: "all"
 });
 
-const PREFIX = "b";
+const PREFIX = "f";
 const youtube = new YouTube(process.env.YTAPI_KEY);
 const queue = new Map();
 
@@ -272,13 +272,24 @@ __**Command list**__
     }
     return message.channel.send("Aku tidak sedang bernyanyi! hmph!~ 😤");
   
-  } else if (message.content.startsWith(PREFIX + 'avatar')) {
-    const user = message.mentions.users.first() || message.author;
-    const avatarEmbed = new Discord.RichEmbed()
-        .setColor(0x333333)
-        .setAuthor(user.username)
-        .setImage(user.avatarURL);
-    message.channel.send(avatarEmbed);
+  } else if(message.content.startsWith(PREFIX+'avatar')){
+    
+        
+    if(message.mentions.users.size){
+        let member=message.mentions.users.first()
+    if(member){
+        const emb=new Discord.MessageEmbed().setImage(member.displayAvatarURL()).setTitle(member.username)
+        message.channel.send(emb)
+        
+    }
+    else{
+        message.channel.send("Sorry none found with that name")
+
+    }
+    }else{
+        const emb=new Discord.MessageEmbed().setImage(message.author.displayAvatarURL()).setTitle(message.author.username)
+        message.channel.send(emb)
+    }
 }
 });
 
