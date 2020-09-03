@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const yt = require('ytdl-core');
 const fs = require('fs');
 const now = require('performance-now');
-const { d_token, yt_token, name, oauth, prefix, passes } = require('./config.json');
 const YouTube = require('youtube-node');
 const youTube = new YouTube();
 youTube.setKey(yt_token);
@@ -141,7 +140,7 @@ msg.reply("", {embed: {
  'help': (msg) => {
   msg.reply("I've sent a list of commands to you. Check your DM's.");
   let help = [
-   "Prefix is `s.`",
+   "Prefix is `f`",
    "**help** = Sends this message.",
    "**join** = Joins the voice channel you're connected to.",
    "**play** = Starts playing a song in your playlist.",
