@@ -1,5 +1,4 @@
 const { Discord, Client, Util, MessageEmbed } = require("discord.js");
-const Commando = require('discord.js-commando');
 require("dotenv").config();
 
 const bot = new Client({
@@ -8,24 +7,10 @@ const bot = new Client({
 
 const prefix1 = "f";
 const prefix2 = "fischl";
-const count = new Commando.Client({commandPrefix: '$'});
-const guild = count.guilds.get("691557706846306385");
-const MIN_INTERVAL = 3 * 1000;
-
-bot.registry.registerGroup('connectc', 'Connectc');
-bot.registry.registerGroup('defaultc', 'Defaultc');
-bot.registry.registerDefaults();
-bot.registry.registerCommandsIn(__dirname + "/commands")
-
 
 bot.on("ready", () => {
     console.log(`[READY] ${bot.user.tag} has been successfully booted up!`)
     bot.user.setActivity("in the darkness!")
-    setInterval(function(){
-        var memberCount = guild.members.filter(member => !member.user.bot).size;
-        var memberCountChannel = count.channels.get("751113088174129182");
-        memberCountChannel.setName("👤Haque: "+ memberCount +" 👤");
-    }, MIN_INTERVAL);
   });
 bot.on("warn", console.warn);
 bot.on("error", console.error);
@@ -41,6 +26,14 @@ bot.on("message", async (message) => { // eslint-disable-line
     
     let command = message.content.toLowerCase().split(" ")[0];
     command = command.slice(prefix1.length);
+
+    if (message.content.startsWith(prefix1 + 'member')) {
+    let myGuild = client.guilds.get("691557706846306385");
+    let memberCount = myGuild.memberCount;
+    let memberCountChannel = myGuild.channels.get("751113088174129182");
+        memberCountChannel.setName("Member•" +memberCount+ "•User")
+        message.channel.send(myGuild.memberCount)
+    }
 
     if (message.content.startsWith(prefix1 + 'avatar') || message.content.startsWith(prefix2 + 'avatar'));
         {
