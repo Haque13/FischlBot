@@ -7,7 +7,7 @@ const bot = new Client({
     disableMentions: "all"
 });
 
-const PREFIX = "b";
+const PREFIX = "f";
 const youtube = new YouTube(process.env.YTAPI_KEY);
 const queue = new Map();
 
@@ -37,16 +37,16 @@ bot.on("message", async (message) => { // eslint-disable-line
             .setAuthor(bot.user.tag, bot.user.displayAvatarURL())
             .setDescription(`
 __**Command list**__
-> **\`bplay,bp [title/url]\`** > untuk memainkan music
-> **\`bsearch,bsc [title]\`** > untuk mencari music
-> \`bskip,bs\` > untuk memainkan lagu selanjutnya
-> \`bstop,bye\` > untuk menghentikan lagu dan mengeluarkan bot
-> \`bpause,bp\` > untuk menghentikan lagu sementara
-> \`bresume,bres\` > untuk melanjutkan lagu yg terhenti
-> \`bnowplaying,bnp\` > untuk melihat lagu yg sedang dimainkan
-> \`bqueue,bq\` > untuk melihat antrian lagu
-> \`bloop\` > untuk mengulang lagu yg sedang dimainkan
-> \`bvolume,bvol\` > untuk mengubah volume suara 
+> **\`fplay,fp [title/url]\`** > untuk memainkan music
+> **\`fsearch,fsc [title]\`** > untuk mencari music
+> \`fskip,fs\` > untuk memainkan lagu selanjutnya
+> \`fstop,fuckoff\` > untuk menghentikan lagu dan mengeluarkan bot
+> \`fpause,fp\` > untuk menghentikan lagu sementara
+> \`fresume,fres\` > untuk melanjutkan lagu yg terhenti
+> \`fnowplaying,fnp\` > untuk melihat lagu yg sedang dimainkan
+> \`fqueue,fq\` > untuk melihat antrian lagu
+> \`floop\` > untuk mengulang lagu yg sedang dimainkan
+> \`fvolume,fvol\` > untuk mengubah volume suara 
     `)
       .setFooter('music bot made by Haque#8967');
     message.channel.send(helpembed);
@@ -192,7 +192,7 @@ __**Command list**__
       "⏭️  **|**  Baiklaahh.. aku akan menyanyikan lagu yg lain untukmu 😉"
     );
 
-  } else if (command === "stop" || command === "ye") {
+  } else if (command === "stop" || command === "uckoff") {
     if (!message.member.voice.channel)
       return message.channel.send(
         "Maafkan aku, tapi kamu harus berada di voice channel jika ingin menghentikanku bernyanyi!"
@@ -336,10 +336,9 @@ function getUserFromMention(mention) {
 	if (mention.startsWith('<@') && mention.endsWith('>')) {
 		mention = mention.slice(2, -1);
 
-		if (mention.startsWith('!')) {
+		if (mention.startsWith('f')) {
 			mention = mention.slice(1);
 		}
-
 		return client.users.cache.get(mention);
 	}
 }
