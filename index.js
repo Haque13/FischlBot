@@ -1,44 +1,39 @@
-const Discord = require("discord.js");
-const fs = require("fs");
-const config = require("./config.json");
-const prefix = config.prefix;
-const bot = new Discord.Client({
-  disableMentions: "everyone",
-  partials: ["REACTION"],
+const { Client, Util, MessageEmbed, Discord, RichEmbed } = require("discord.js");
+require("dotenv").config();
+
+const bot = new Client({
+    disableMentions: "all"
 });
-bot.prefix = prefix;
-bot.commands = new Discord.Collection();
-bot.aliases = new Discord.Collection();
-bot.snipes = new Discord.Collection();
-bot.events = new Discord.Collection();
-bot.categories = fs.readdirSync("./commands/");
-const token = require(`./token.json`);
-const message = require("./events/guild/message");
-mongoose.connect(token.Mongo, {
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-});
-["command", "server"].forEach((handler) => {
-  require(`./handlers/${handler}`)(bot);
-});
+
+const PREFIX = "f";
+
 bot.on("ready", () => {
-  require("./events/client/ready")(bot);
-});
-bot.on("message", async (message) => {
-  message.member; //-- GuildMember based
-  message.author; //-- User based
-  require("./events/guild/message")(bot, message);
-});
-bot.on("messageUpdate", async (oldMessage, newMessage) => {
-  require("./events/guild/messageUpdate")(oldMessage, newMessage);
-});
-bot.on("messageDelete", async (message) => {
-  require("./events/guild/messageDelete")(message);
-});
-bot.on("messageReactionAdd", (reaction, user) => {
-  require("./events/guild/messageReactionAdd")(reaction, user);
-});
-bot.on("messageReactionRemove", (reaction, user) => {
-  require("./events/guild/messageReactionRemove")(reaction, user);
-});
-bot.login(token.Token);
+    console.log(`[READY] ${bot.user.tag} has been successfully booted up!`)
+    bot.user.setActivity("a music for you!🎶 | type bhelp for command list")
+  });
+bot.on("warn", console.warn);
+bot.on("error", console.error);
+bot.on("shardDisconnect", (event, id) => console.log(`[SHARD] Shard ${id} disconnected (${event.code}) ${event}, trying to reconnect...`));
+bot.on("shardReconnecting", (id) => console.log(`[SHARD] Shard ${id} reconnecting...`));
+bot.on("message", async (message) => { // eslint-disable-line
+    if (message.author.bot) return;
+    if (!message.content.toLowerCase().startsWith(PREFIX)) return;
+
+    const args = message.content.split(" ");
+    const searchString = args.slice(1).join(" ");
+    const url = args[1] ? args[1].replace(/<(.+)>/g, "$1") : "";
+    
+    let command = message.content.toLowerCase().split(" ")[0];
+    command = command.slice(PREFIX.length);
+
+    if (message.content.startsWith(PREFIX + 'avatar')) {
+        const user = message.mentions.users.first() || message.author;
+        const avatarEmbed = new Discord.RichEmbed()
+            .setColor(0x333333)
+            .setAuthor(user.username)
+            .setImage(user.avatarURL);
+        message.channel.send(avatarEmbed);
+    }
+})
+
+bot.login(process.env.BOT_TOKEN);
