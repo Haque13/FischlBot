@@ -15,14 +15,31 @@ bot.on("warn", console.warn);
 bot.on("error", console.error);
 bot.on("shardDisconnect", (event, id) => console.log(`[SHARD] Shard ${id} disconnected (${event.code}) ${event}, trying to reconnect...`));
 bot.on("shardReconnecting", (id) => console.log(`[SHARD] Shard ${id} reconnecting...`));
-bot.on('message', message => {
-	if (!message.content.startsWith(config.prefix)) return;
+bot.on("message", async (message) => { // eslint-disable-line
+  if (message.author.bot) return;
+  if (!message.content.toLowerCase().startsWith(PREFIX)) return;
 
-	const withoutPrefix = message.content.slice(config.prefix.length);
-	const split = withoutPrefix.split(/ +/);
-	const command = split[0];
-	const args = split.slice(1);
-});
+  const args = message.content.split(" ");
+  const searchString = args.slice(1).join(" ");
+  const url = args[1] ? args[1].replace(/<(.+)>/g, "$1") : "";
+  const serverQueue = queue.get(message.guild.id);
+
+  let command = message.content.toLowerCase().split(" ")[0];
+  command = command.slice(PREFIX.length);
+  
+  if (command === 'avatar') {
+    if (args[0]) {
+      const user = getUserFromMention(args[0]);
+      if (!user) {
+        return message.reply('Please use a proper mention if you want to see someone else\'s avatar.');
+      }
+  
+      return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL({ dynamic: true })}`);
+    }
+  
+    return message.channel.send(`${message.author.username}, your avatar: ${message.author.displayAvatarURL({ dynamic: true })}`);
+  }
+})
 
 function getUserFromMention(mention) {
 	// The id is the first and only match found by the RegEx.
@@ -38,17 +55,5 @@ function getUserFromMention(mention) {
 	return client.users.cache.get(id);
 }
 
-if (command === 'avatar') {
-	if (args[0]) {
-		const user = getUserFromMention(args[0]);
-		if (!user) {
-			return message.reply('Please use a proper mention if you want to see someone else\'s avatar.');
-		}
-
-		return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL({ dynamic: true })}`);
-	}
-
-	return message.channel.send(`${message.author.username}, your avatar: ${message.author.displayAvatarURL({ dynamic: true })}`);
-}
 
 bot.login(process.env.BOT_TOKEN);
