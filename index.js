@@ -1,6 +1,4 @@
 const { Client, Util, MessageEmbed } = require("discord.js");
-const YouTube = require("simple-youtube-api");
-const ytdl = require("ytdl-core");
 require("dotenv").config();
 
 const bot = new Client({
@@ -8,384 +6,49 @@ const bot = new Client({
 });
 
 const PREFIX = "f";
-const youtube = new YouTube(process.env.YTAPI_KEY);
-const queue = new Map();
 
 bot.on("ready", () => {
     console.log(`[READY] ${bot.user.tag} has been successfully booted up!`)
-    bot.user.setActivity("a music for you!🎶 | type bhelp for command list")
+    bot.user.setActivity("in the darkness!")
   });
 bot.on("warn", console.warn);
 bot.on("error", console.error);
 bot.on("shardDisconnect", (event, id) => console.log(`[SHARD] Shard ${id} disconnected (${event.code}) ${event}, trying to reconnect...`));
 bot.on("shardReconnecting", (id) => console.log(`[SHARD] Shard ${id} reconnecting...`));
-bot.on("message", async (message) => { // eslint-disable-line
-    if (message.author.bot) return;
-    if (!message.content.toLowerCase().startsWith(PREFIX)) return;
+bot.on('message', message => {
+	if (!message.content.startsWith(config.prefix)) return;
 
-    const args = message.content.split(" ");
-    const searchString = args.slice(1).join(" ");
-    const url = args[1] ? args[1].replace(/<(.+)>/g, "$1") : "";
-    const serverQueue = queue.get(message.guild.id);
-
-    let command = message.content.toLowerCase().split(" ")[0];
-    command = command.slice(PREFIX.length);
-
-    if (command === "help" || command === "cmd") {
-        const helpembed = new MessageEmbed()
-            .setColor("BLUE")
-            .setAuthor(bot.user.tag, bot.user.displayAvatarURL())
-            .setDescription(`
-__**Command list**__
-> **\`fplay,fp [title/url]\`** > untuk memainkan music
-> **\`fsearch,fsc [title]\`** > untuk mencari music
-> \`fskip,fs\` > untuk memainkan lagu selanjutnya
-> \`fstop,fuckoff\` > untuk menghentikan lagu dan mengeluarkan bot
-> \`fpause,fp\` > untuk menghentikan lagu sementara
-> \`fresume,fres\` > untuk melanjutkan lagu yg terhenti
-> \`fnowplaying,fnp\` > untuk melihat lagu yg sedang dimainkan
-> \`fqueue,fq\` > untuk melihat antrian lagu
-> \`floop\` > untuk mengulang lagu yg sedang dimainkan
-> \`fvolume,fvol\` > untuk mengubah volume suara 
-    `)
-      .setFooter('music bot made by Haque#8967');
-    message.channel.send(helpembed);
-  }
-  if (command === "play" || command === "p") {
-    const voiceChannel = message.member.voice.channel;
-    if (!voiceChannel)
-      return message.channel.send(
-        "Maafkan aku, tapi kamu harus berada di voice channel jika ingin mendengarkanku bernyanyi!"
-      );
-    const permissions = voiceChannel.permissionsFor(message.client.user);
-    if (!permissions.has("CONNECT")) {
-      return message.channel.send(
-        "Sorry, but I need a **`CONNECT`** permission to proceed!"
-      );
-    }
-    if (!permissions.has("SPEAK")) {
-      return message.channel.send(
-        "Sorry, but I need a **`SPEAK`** permission to proceed!"
-      );
-    }
-    if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
-      const playlist = await youtube.getPlaylist(url);
-      const videos = await playlist.getVideos();
-      for (const video of Object.values(videos)) {
-        const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
-        await handleVideo(video2, message, voiceChannel, true); // eslint-disable-line no-await-in-loop
-      }
-      return message.channel.send(
-        `✅  **|**  Playlist: **\`${playlist.title}\`** sudah kutambahkan ke daftar selanjutnya 😉`
-      );
-    } else {
-      try {
-        var video = await youtube.getVideo(url);
-      } catch (error) {
-        try {
-          var videos = await youtube.searchVideos(searchString, 10);
-          var video = await youtube.getVideoByID(videos[0].id);
-          if (!video)
-            return message.channel.send(
-              "🆘  **|**  Maafkan aku, Aku tidak dapat menemukan hasil apapun 😢"
-            );
-        } catch (err) {
-          console.error(err);
-          return message.channel.send(
-            "🆘  **|**  Maafkan aku, Aku tidak dapat menemukan hasil apapun 😢"
-          );
-        }
-      }
-      return handleVideo(video, message, voiceChannel);
-    }
-  }
-  if (command === "search" || command === "sc") {
-    const voiceChannel = message.member.voice.channel;
-    if (!voiceChannel)
-      return message.channel.send(
-        "Maafkan aku, tapi kamu harus berada di voice channel jika ingin memilih lagu!"
-      );
-    const permissions = voiceChannel.permissionsFor(message.client.user);
-    if (!permissions.has("CONNECT")) {
-      return message.channel.send(
-        "Sorry, but I need a **`CONNECT`** permission to proceed!"
-      );
-    }
-    if (!permissions.has("SPEAK")) {
-      return message.channel.send(
-        "Sorry, but I need a **`SPEAK`** permission to proceed!"
-      );
-    }
-    if (url.match(/^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/)) {
-      const playlist = await youtube.getPlaylist(url);
-      const videos = await playlist.getVideos();
-      for (const video of Object.values(videos)) {
-        const video2 = await youtube.getVideoByID(video.id); // eslint-disable-line no-await-in-loop
-        await handleVideo(video2, message, voiceChannel, true); // eslint-disable-line no-await-in-loop
-      }
-      return message.channel.send(
-        `✅  **|**  Playlist: **\`${playlist.title}\`** sudah kutambahkan ke daftar selanjutnya 😉`
-      );
-    } else {
-      try {
-        var video = await youtube.getVideo(url);
-      } catch (error) {
-        try {
-          var videos = await youtube.searchVideos(searchString, 10);
-          let index = 0;
-          let embedPlay = new MessageEmbed()
-            .setColor("BLUE")
-            .setAuthor("Search results", message.author.displayAvatarURL())
-            .setDescription(
-              `${videos
-                .map(video2 => `**\`${++index}\`  |**  ${video2.title}`)
-                .join("\n")}`
-            )
-            .setFooter(
-              "Please choose one of the following 10 results, this embed will auto-deleted in 15 seconds"
-            );
-          // eslint-disable-next-line max-depth
-          message.channel.send(embedPlay).then(m =>
-            m.delete({
-              timeout: 15000
-            })
-          );
-          try {
-            var response = await message.channel.awaitMessages(
-              message2 => message2.content > 0 && message2.content < 11,
-              {
-                max: 1,
-                time: 15000,
-                errors: ["time"]
-              }
-            );
-          } catch (err) {
-            console.error(err);
-            return message.channel.send(
-              "The song selection time has expired in 15 seconds, the request has been canceled."
-            );
-          }
-          const videoIndex = parseInt(response.first().content);
-          var video = await youtube.getVideoByID(videos[videoIndex - 1].id);
-        } catch (err) {
-          console.error(err);
-          return message.channel.send(
-            "🆘  **|**  Maafkan aku, Aku tidak dapat menemukan hasil apapun 😢"
-          );
-        }
-      }
-      response.delete();
-      return handleVideo(video, message, voiceChannel);
-    }
-    
-  } else if (command === "skip" || command === "s") {
-    if (!message.member.voice.channel)
-      return message.channel.send(
-        "Maafkan aku, tapi kamu harus berada di voice channel jika ingin melewatkan lagu!"
-      );
-    if (!serverQueue)
-      return message.channel.send("Aku tidak sedang bernyanyi! hmph!~ 😤");
-    serverQueue.connection.dispatcher.end(
-      "[runCmd] Skip command has been used"
-    );
-    return message.channel.send(
-      "⏭️  **|**  Baiklaahh.. aku akan menyanyikan lagu yg lain untukmu 😉"
-    );
-
-  } else if (command === "stop" || command === "uckoff") {
-    if (!message.member.voice.channel)
-      return message.channel.send(
-        "Maafkan aku, tapi kamu harus berada di voice channel jika ingin menghentikanku bernyanyi!"
-      );
-    if (!serverQueue)
-      return message.channel.send("Aku tidak sedang bernyanyi! hmph!~ 😤");
-    serverQueue.songs = [];
-    serverQueue.connection.dispatcher.end(
-      "[runCmd] Stop command has been used"
-    );
-    return message.channel.send(
-      "⏹️  **|**  Terimakasih sudah mendengarkan, sampai jumpa! 👋"
-    );
-
-  } else if (command === "volume" || command === "vol") {
-    if (!message.member.voice.channel)
-      return message.channel.send(
-        "Maafkan aku, tapi kamu harus berada di voice channel jika ingin mengatur suara ku!"
-      );
-    if (!serverQueue)
-      return message.channel.send("Aku tidak sedang bernyanyi! hmph!~ 😤");
-    if (!args[1])
-      return message.channel.send(
-        `Volume saat ini adalah: **\`${serverQueue.volume}%\`**`
-      );
-    if (isNaN(args[1]) || args[1] > 100)
-      return message.channel.send(
-        "Volume hanya bisa di atur antara **`1`** - **`100`**"
-      );
-    process.env.VOLUME = args[1];
-    serverQueue.connection.dispatcher.setVolume(args[1] / 100);
-    return message.channel.send(`Sudah ku ubah volume nya ke: **\`${args[1]}%\`**`);
-
-  } else if (command === "nowplaying" || command === "np") {
-    if (!serverQueue)
-      return message.channel.send("Aku tidak sedang bernyanyi! hmph!~ 😤");
-    return message.channel.send(
-      `🎶  **|**  Now Playing: **\`${serverQueue.songs[0].title}\`**`
-    );
-
-  } else if (command === "queue" || command === "q") {
-    if (!serverQueue)
-      return message.channel.send("Aku tidak sedang bernyanyi! hmph!~ 😤");
-    let embedQueue = new MessageEmbed()
-      .setColor("BLUE")
-      .setAuthor("Song queue", message.author.displayAvatarURL())
-      .setDescription(
-        `${serverQueue.songs.map(song => `**-** ${song.title}`).join("\n")}`
-      )
-      .setFooter(`• Now Playing: ${serverQueue.songs[0].title}`);
-    return message.channel.send(embedQueue);
-
-  } else if (command === "pause" || command === "ps") {
-    if (serverQueue && serverQueue.playing) {
-      serverQueue.playing = false;
-      serverQueue.connection.dispatcher.pause();
-      return message.channel.send("⏸  **|**  Oke, Aku istirahat dulu 😅");
-    }
-    return message.channel.send("Aku tidak sedang bernyanyi! hmph!~ 😤");
-
-  } else if (command === "resume" || command === "res") {
-    if (serverQueue && !serverQueue.playing) {
-      serverQueue.playing = true;
-      serverQueue.connection.dispatcher.resume();
-      return message.channel.send("▶  **|**  Aku lanjut yaa!.. 😉");
-    }
-    return message.channel.send("Aku tidak sedang bernyanyi! hmph!~ 😤");
-
-  } else if (command === "loop") {
-    if (serverQueue) {
-      serverQueue.loop = !serverQueue.loop;
-      return message.channel.send(
-        `🔁  **|**  Loop is **\`${
-          serverQueue.loop === true ? "enabled" : "disabled"
-        }\`**`
-      );
-    }
-    return message.channel.send("Aku tidak sedang bernyanyi! hmph!~ 😤");
-  
-  } else if (command === 'avatar') {
-    if (args[0]) {
-      const user = getUserFromMention(args[0]);
-      if (!user) {
-        return message.reply('Please use a proper mention if you want to see someone else\'s avatar.');
-      }
-  
-      return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL({ dynamic: true })}`);
-    }
-  
-    return message.channel.send(`${message.author.username}, your avatar: ${message.author.displayAvatarURL({ dynamic: true })}`);
-  } 
+	const withoutPrefix = message.content.slice(config.prefix.length);
+	const split = withoutPrefix.split(/ +/);
+	const command = split[0];
+	const args = split.slice(1);
 });
-
-async function handleVideo(video, message, voiceChannel, playlist = false) {
-  const serverQueue = queue.get(message.guild.id);
-  const song = {
-    id: video.id,
-    title: Util.escapeMarkdown(video.title),
-    url: `https://www.youtube.com/watch?v=${video.id}`
-  };
-  if (!serverQueue) {
-    const queueConstruct = {
-      textChannel: message.channel,
-      voiceChannel: voiceChannel,
-      connection: null,
-      songs: [],
-      volume: process.env.VOLUME,
-      playing: true,
-      loop: false
-    };
-    queue.set(message.guild.id, queueConstruct);
-    queueConstruct.songs.push(song);
-
-    try {
-      var connection = await voiceChannel.join();
-      queueConstruct.connection = connection;
-      play(message.guild, queueConstruct.songs[0]);
-    } catch (error) {
-      console.error(
-        `[ERROR] I could not join the voice channel, because: ${error}`
-      );
-      queue.delete(message.guild.id);
-      return message.channel.send(
-        `I could not join the voice channel, because: **\`${error}\`**`
-      );
-    }
-  } else {
-    serverQueue.songs.push(song);
-    if (playlist) return;
-    else
-      return message.channel.send(
-        `✅  **|**  **\`${song.title}\`** sudah kutambahkan ke daftar selanjutnya 😉`
-      );
-  }
-  return;
-}
 
 function getUserFromMention(mention) {
-	if (!mention) return;
+	// The id is the first and only match found by the RegEx.
+	const matches = mention.match(/^<@!?(\d+)>$/);
 
-	if (mention.startsWith('<@') && mention.endsWith('>')) {
-		mention = mention.slice(2, -1);
+	// If supplied variable was not a mention, matches will be null instead of an array.
+	if (!matches) return;
 
-		if (mention.startsWith('f')) {
-			mention = mention.slice(1);
+	// However the first element in the matches array will be the entire mention, not just the ID,
+	// so use index 1.
+	const id = matches[1];
+
+	return client.users.cache.get(id);
+}
+
+if (command === 'avatar') {
+	if (args[0]) {
+		const user = getUserFromMention(args[0]);
+		if (!user) {
+			return message.reply('Please use a proper mention if you want to see someone else\'s avatar.');
 		}
-		return client.users.cache.get(mention);
+
+		return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL({ dynamic: true })}`);
 	}
+
+	return message.channel.send(`${message.author.username}, your avatar: ${message.author.displayAvatarURL({ dynamic: true })}`);
 }
-
-function play(guild, song) {
-  const serverQueue = queue.get(guild.id);
-
-  if (!song) {
-    serverQueue.voiceChannel.leave();
-    return queue.delete(guild.id);
-  }
-
-  const dispatcher = serverQueue.connection
-    .play(ytdl(song.url))
-    .on("finish", () => {
-      const shiffed = serverQueue.songs.shift();
-      if (serverQueue.loop === true) {
-        serverQueue.songs.push(shiffed);
-      }
-      play(guild, serverQueue.songs[0]);
-    })
-    .on("error", error => console.error(error));
-  dispatcher.setVolume(process.env.VOLUME / 100);
-
-  serverQueue.textChannel.send({
-    embed: {
-      color: "BLUE",
-      description: `🎶  **|**  Aku akan menyanyikan: **\`${song.title}\`**`
-    }
-  });
-}
-var express = require("express");
-var http = require("http");
-const { type } = require("os");
-var app = express();
-
-// Ping the app
-app.use(express.static("public"));
-// http://expressjs.com/en/starter/basic-routing.html
-app.get("/", function (request, response) {
-    response.sendStatus(200);
-});
-
-// Request listener
-var listener = app.listen(process.env.PORT || 8000, function () {
-    console.log("Your app is listening on port " + listener.address().port);
-});
-
 
 bot.login(process.env.BOT_TOKEN);
