@@ -1,1 +1,1 @@
-Worker: node avatar.js
+Worker: node index.js
