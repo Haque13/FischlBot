@@ -5,7 +5,8 @@ const bot = new Client({
     disableMentions: "all"
 });
 
-const PREFIX = "f";
+const prefix1 = "f";
+const prefix2 = "fischl";
 
 bot.on("ready", () => {
     console.log(`[READY] ${bot.user.tag} has been successfully booted up!`)
@@ -17,17 +18,17 @@ bot.on("shardDisconnect", (event, id) => console.log(`[SHARD] Shard ${id} discon
 bot.on("shardReconnecting", (id) => console.log(`[SHARD] Shard ${id} reconnecting...`));
 bot.on("message", async (message) => { // eslint-disable-line
     if (message.author.bot) return;
-    if (!message.content.toLowerCase().startsWith(PREFIX)) return;
+    if (!message.content.toLowerCase().startsWith(prefix1)) return;
 
     const args = message.content.split(" ");
     const searchString = args.slice(1).join(" ");
     const url = args[1] ? args[1].replace(/<(.+)>/g, "$1") : "";
     
     let command = message.content.toLowerCase().split(" ")[0];
-    command = command.slice(PREFIX.length);
+    command = command.slice(prefix1.length);
 
-    if (message.content.startsWith(PREFIX/'fischl' + 'avatar')) {
-    
+    if (message.content.startsWith(prefix1 + 'avatar') || message.content.startsWith(prefix2 + 'avatar'));
+        {
         let embed = new MessageEmbed();
     if(!message.mentions.users.first()) {
         message.channel.send("Maaf, aku tidak mempunyai cukup kekuatan untuk memanggil Avatar orang itu")
