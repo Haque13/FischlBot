@@ -28,7 +28,7 @@ bot.on("message", async (message) => { // eslint-disable-line
 
     if (message.content.startsWith(PREFIX+'avatar')) {
         const user = message.mentions.users.first() || message.author;
-        const avatarEmbed = new Discord.RichEmbed()
+        const avatarEmbed = new Client.RichEmbed()
             .setColor(0x333333)
             .setAuthor(user.username)
             .setImage(user.avatarURL);
