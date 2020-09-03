@@ -22,7 +22,6 @@ bot.on("message", async (message) => { // eslint-disable-line
   const args = message.content.split(" ");
   const searchString = args.slice(1).join(" ");
   const url = args[1] ? args[1].replace(/<(.+)>/g, "$1") : "";
-  const serverQueue = queue.get(message.guild.id);
 
   let command = message.content.toLowerCase().split(" ")[0];
   command = command.slice(PREFIX.length);
