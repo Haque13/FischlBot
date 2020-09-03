@@ -38,8 +38,6 @@ bot.on("message", async (message) => { // eslint-disable-line
         embed.setImage(message.author.displayAvatarURL({size: 2048, dynamic: true}));
         message.channel.send(embed);
     } else {
-            message.channel.send("Maaf, aku tidak mempunyai cukup kekuatan untuk memanggil Avatar orang itu")};
-    } else {
         let user = message.mentions.users.first();
         embed.setTitle(`${user.username}'s avatar`);
         embed.setDescription('Aku berhasil menemukan Avatar nya!') | (`Links:\n[png](${user.displayAvatarURL({format: "png", size: 2048})}) | [jpg](${user.displayAvatarURL({format: "jpg", size: 2048})}) | [gif](${user.displayAvatarURL({format: "gif", size: 2048, dynamic: true})}) | [webp](${user.displayAvatarURL({format: "webp", size: 2048})})`);
@@ -48,7 +46,8 @@ bot.on("message", async (message) => { // eslint-disable-line
         embed.setFooter(user.username);
         embed.setImage(bot.users.cache.get(user.id).displayAvatarURL({size: 2048, dynamic: true}));
         message.channel.send(embed)};
-    }
-)
+    } else {
+        message.channel.send("Maaf, aku tidak mempunyai cukup kekuatan untuk memanggil Avatar orang itu")};    
+})
 
 bot.login(process.env.BOT_TOKEN);
