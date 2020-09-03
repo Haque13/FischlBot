@@ -1,4 +1,4 @@
-const { Client, Util, MessageEmbed, avatarEmbed } = require("discord.js");
+const { Client, Util, MessageEmbed, RichEmbed } = require("discord.js");
 require("dotenv").config();
 
 const bot = new Client({
@@ -28,7 +28,7 @@ bot.on("message", async (message) => { // eslint-disable-line
 
     if (message.content.startsWith(PREFIX+'avatar')) {
         const user = message.mentions.users.first() || message.author;
-        const Discord.RichEmbed() = new avatarEmbed
+        const avatarEmbed = new Discord.RichEmbed()
             .setColor(0x333333)
             .setAuthor(user.username)
             .setImage(user.avatarURL);
