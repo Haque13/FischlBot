@@ -1,0 +1,7 @@
+node_modules/
+build/
+.vscode/
+config/config.json
+shard.ts
+
+dev/

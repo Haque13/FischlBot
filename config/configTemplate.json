@@ -1,0 +1,41 @@
+{
+    "owners" : [""],
+    "tokens" : {
+        "discord" : "",
+        "soundcloud" : "",
+        "youtube" : "",
+        "spotify" : {
+            "clientId" : "",
+            "clientSecret" : ""
+        }
+    },
+    "commandToken" : "$",
+    "botPerms": [
+        "ADD_REACTIONS",
+        "CHANGE_NICKNAME",
+        "VIEW_CHANNEL",
+        "SEND_MESSAGES",
+        "SEND_TTS_MESSAGES",
+        "MANAGE_MESSAGES",
+        "EMBED_LINKS",
+        "READ_MESSAGE_HISTORY",
+        "MENTION_EVERYONE",
+        "CONNECT",
+        "SPEAK"
+    ],
+    "disabledEvents": [
+        "TYPING_START"
+    ],
+    "sc": {
+        "limit": 5,
+        "interval": 0.5
+    },
+    "invite": true,
+    "music": {
+        "limit": 10
+    },
+    "playlists": {
+        "idLength": 15,
+        "nameLength": 25
+    }
+}
