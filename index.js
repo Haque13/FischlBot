@@ -1,4 +1,5 @@
 const { Discord, Client, Util, MessageEmbed } = require("discord.js");
+const Commando = require('discord.js-commando');
 require("dotenv").config();
 
 const bot = new Client({
