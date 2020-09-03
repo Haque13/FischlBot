@@ -28,7 +28,7 @@ bot.on("message", async (message) => { // eslint-disable-line
     command = command.slice(prefix1.length);
 
     if (message.content.startsWith(prefix1 + 'member')) {
-    let myGuild = client.guilds.get("691557706846306385");
+    let myGuild = bot.guilds.get("691557706846306385");
     let memberCount = myGuild.memberCount;
     let memberCountChannel = myGuild.channels.get("751113088174129182");
         memberCountChannel.setName("Member•" +memberCount+ "•User")
