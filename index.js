@@ -26,7 +26,7 @@ bot.on("message", async (message) => { // eslint-disable-line
     let command = message.content.toLowerCase().split(" ")[0];
     command = command.slice(PREFIX.length);
 
-    if (message.content.startsWith('avatar')) {
+    if (message.content.startsWith(PREFIX/'fischl' + 'avatar')) {
     
         let embed = new MessageEmbed();
     if(!message.mentions.users.first()) {
