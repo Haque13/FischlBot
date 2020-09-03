@@ -1,8 +1,3 @@
-{  
-  "d_token": "NzQ0MjAwMjk1NzE3Nzk3OTg4.XzfwiQ.ywEud9fZZKjTlJVhI7Oo92VxA7A",
-  "prefix": "f",
-  "name": "Fischl",
-  "oauth": "https://discord.com/oauth2/authorize?client_id=744200295717797988&scope=bot&permissions=8",
-  "passes": 1,
-  "yt_token": "AIzaSyDsI5x_O_Ae0kI93QvV4No1OGLGj7LUrZI"
+{
+  "token": "NzQ0MjAwMjk1NzE3Nzk3OTg4.XzfwiQ.ywEud9fZZKjTlJVhI7Oo92VxA7A"
 }
