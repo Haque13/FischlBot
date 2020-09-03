@@ -27,19 +27,11 @@ bot.on("message", async (message) => { // eslint-disable-line
     let command = message.content.toLowerCase().split(" ")[0];
     command = command.slice(prefix1.length);
 
-    if (message.content.startsWith(prefix1 + 'member')) {
-    let myGuild = Client.guilds.get("691557706846306385");
-    let memberCount = myGuild.memberCount;
-    let memberCountChannel = myGuild.channels.get("751113088174129182");
-        memberCountChannel.setName("Member•" +memberCount+ "•User")
-        message.channel.send(myGuild.memberCount)
-    }
-
     if (message.content.startsWith(prefix1 + 'avatar') || message.content.startsWith(prefix2 + 'avatar'));
         {
         let embed = new MessageEmbed();
     if(!message.mentions.users.first()) {
-        message.channel.send("Maaf, aku tidak mempunyai cukup kekuatan untuk memanggil Avatar orang itu")
+        message.channel.send("Maaf, aku tidak mempunyai cukup kekuatan untuk memanggil Avatar itu")
     } else {
         let user = message.mentions.users.first();
         embed.setTitle(`${user.username}'s avatar`);
