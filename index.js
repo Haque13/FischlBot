@@ -25,34 +25,15 @@ bot.on("message", async (message) => { // eslint-disable-line
 
   let command = message.content.toLowerCase().split(" ")[0];
   command = command.slice(PREFIX.length);
-  
-  if (command === 'avatar') {
-    if (args[0]) {
-      const user = getUserFromMention(args[0]);
-      if (!user) {
-        return message.reply('Please use a proper mention if you want to see someone else\'s avatar.');
-      }
-  
-      return message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL({ dynamic: true })}`);
-    }
-  
-    return message.channel.send(`${message.author.username}, your avatar: ${message.author.displayAvatarURL({ dynamic: true })}`);
-  }
-})
-
-function getUserFromMention(mention) {
-	// The id is the first and only match found by the RegEx.
-	const matches = mention.match(/^<@!?(\d+)>$/);
-
-	// If supplied variable was not a mention, matches will be null instead of an array.
-	if (!matches) return;
-
-	// However the first element in the matches array will be the entire mention, not just the ID,
-	// so use index 1.
-	const id = matches[1];
-
-	return client.users.cache.get(id);
+ 
+  if (message.content.startsWith(PREFIX + 'avatar')) {
+    const user = message.mentions.users.first() || message.author;
+    const avatarEmbed = new Discord.RichEmbed()
+        .setColor(0x333333)
+        .setAuthor(user.username)
+        .setImage(user.avatarURL);
+    message.channel.send(avatarEmbed);
 }
-
+})
 
 bot.login(process.env.BOT_TOKEN);
