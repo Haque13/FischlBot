@@ -8,6 +8,13 @@ const bot = new Client({
 const prefix1 = "f";
 const prefix2 = "fischl";
 const guild = bot.guilds.get("691557706846306385");
+const MIN_INTERVAL = 3 * 1000;
+
+bot.registry.registerGroup('connectc', 'Connectc');
+bot.registry.registerGroup('defaultc', 'Defaultc');
+bot.registry.registerDefaults();
+bot.registry.registerCommandsIn(__dirname + "/commands")
+
 
 bot.on("ready", () => {
     console.log(`[READY] ${bot.user.tag} has been successfully booted up!`)
