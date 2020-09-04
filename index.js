@@ -1,4 +1,5 @@
 const { Discord, Client, Util, MessageEmbed } = require("discord.js");
+const client = new Discord.Client();
 require("dotenv").config();
 
 const bot = new Client({
@@ -11,7 +12,7 @@ const prefix2 = "oz";
 bot.on("ready", () => {
     console.log(`[READY] ${bot.user.tag} has been successfully booted up!`)
     bot.user.setActivity("YOU from the dark! 💜",{ type: 'WATCHING' })
-    let myGuild = bot.guilds.get('645116221007593502');
+    let myGuild = client.guilds.get('645116221007593502');
     let memberCount = myGuild.memberCount;
     let memberCountChannel = myGuild.channels.get('751436248505122836');
     memberCountChannel.setName('Members: ' + memberCount)
