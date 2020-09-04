@@ -10,7 +10,7 @@ const prefix2 = "oz";
 
 bot.on("ready", () => {
     console.log(`[READY] ${bot.user.tag} has been successfully booted up!`)
-    bot.user.setActivity("in the darkness!")
+    bot.user.setActivity("YOU from the darkness! 💜",{ type: 'WATCHING' })
   });
 bot.on("warn", console.warn);
 bot.on("error", console.error);
