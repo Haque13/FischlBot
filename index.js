@@ -18,14 +18,14 @@ bot.on("shardDisconnect", (event, id) => console.log(`[SHARD] Shard ${id} discon
 bot.on("shardReconnecting", (id) => console.log(`[SHARD] Shard ${id} reconnecting...`));
 bot.on("message", async (message) => { // eslint-disable-line
     if (message.author.bot) return;
-    if (!message.content.toLowerCase().startsWith(prefix1)) return;
+    if (!message.content.toLowerCase().startsWith(prefix1 || prefix2)) return;
 
     const args = message.content.split(" ");
     const searchString = args.slice(1).join(" ");
     const url = args[1] ? args[1].replace(/<(.+)>/g, "$1") : "";
     
     let command = message.content.toLowerCase().split(" ")[0];
-        command = command.slice(PREFIX.length);
+        command = command.slice(prefix1.length || prefix2.length);
         
         let embed = new MessageEmbed();
     if (!message.mentions.users.first(command === "avatar" || command === "profile")) {
