@@ -26,7 +26,7 @@ bot.on("message", async (message) => { // eslint-disable-line
     
     let command = message.content.toLowerCase().split(" ")[0];
         command = command.slice(prefix1.length);
-    let command = message.mentions.users.first();
+        command = message.mentions.users.first();
 
         let embed = new MessageEmbed();
     if (command === "avatar" || command === "profile") {
