@@ -9,13 +9,14 @@ const prefix2 = "oz";
 client.on("ready", () => {
     console.log(`[READY] ${client.user.tag} has been successfully booted up!`)
     setInterval(() => {
-        targetGuild = client.guilds.get('691557706846306385')
+        let myGuild = client.guilds.cache.get('691557706846306385');
+        let memberCount = myGuild.memberCount;
         if(targetGuild.available) {
-            client.user.setPresence({ activity: { name: targetGuild.memberCount + ' people from the dark! 💜', type: 'WATCHING' }, status: 'online'  })
+            client.user.setPresence({ activity: { name: memberCount + ' people from the dark! 💜', type: 'WATCHING' }, status: 'online'  })
                   .then(console.log)
                   .catch(console.error);
         }
-  }, 1000 * 60 * 5);
+  }, 1000 * 60 * 1);
 });
 client.on('guildMemberAdd', member => {
     let myGuild = client.guilds.cache.get('691557706846306385');
