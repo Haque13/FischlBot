@@ -26,9 +26,8 @@ bot.on("message", async (message) => { // eslint-disable-line
     
         
         let embed = new MessageEmbed(); {
-    if  (!message.content.toLowerCase().startsWith(prefix1 + 'avatar')) { 
-        (!message.mentions.users.first())
-        message.channel.send("Aku tidak bisa melakukan pemanggilan, jika tidak mengetahui siapa yg harus ku panggil!")       
+    if (!message.mentions.users.first()) { 
+         message.channel.send("Aku tidak bisa melakukan pemanggilan, jika tidak mengetahui siapa yg harus ku panggil!")       
 }  else {
         let user = message.mentions.users.first();
         embed.setTitle(`${user.username}'s avatar`);
