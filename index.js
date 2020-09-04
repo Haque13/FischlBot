@@ -8,13 +8,29 @@ const prefix2 = "oz";
 client.on("ready", () => {
     console.log(`[READY] ${client.user.tag} has been successfully booted up!`)
     client.user.setActivity("YOU from the dark! 💜",{ type: 'WATCHING' })
-    let myGuild = client.guilds.cache.get('645116221007593502');
+    let myGuild = client.guilds.cache.get('691557706846306385');
     let memberCount = myGuild.memberCount;
-    let memberCountChannel = myGuild.channels.cache.get('751436248505122836');
+    let memberCountChannel = myGuild.channels.cache.get('751471565689979051');
     memberCountChannel.setName('Members: ' + memberCount)
     .then(result => console.log(result))
     .catch(error => console.log(error));
 });
+client.on('guildMemberAdd', member => {
+    let myGuild = client.guilds.cache.get('691557706846306385');
+    let memberCount = myGuild.memberCount;
+    let memberCountChannel = myGuild.channels.cache.get('751471565689979051');
+    memberCountChannel.setName('Members: ' + memberCount)
+    .then(result => console.log(result))
+    .catch(error => console.log(error));
+})
+client.on('guildMemberRemove', member => {
+    let myGuild = client.guilds.cache.get('691557706846306385');
+    let memberCount = myGuild.memberCount;
+    let memberCountChannel = myGuild.channels.cache.get('751471565689979051');
+    memberCountChannel.setName('Members: ' + memberCount)
+    .then(result => console.log(result))
+    .catch(error => console.log(error));
+})
 client.on("warn", console.warn);
 client.on("error", console.error);
 client.on("shardDisconnect", (event, id) => console.log(`[SHARD] Shard ${id} disconnected (${event.code}) ${event}, trying to reconnect...`));
