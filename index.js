@@ -10,7 +10,7 @@ client.on("ready", () => {
     client.user.setActivity("YOU from the dark! 💜",{ type: 'WATCHING' })
     let myGuild = client.guilds.cache.get('645116221007593502');
     let memberCount = myGuild.memberCount;
-    let memberCountChannel = myGuild.channels.get('751436248505122836');
+    let memberCountChannel = myGuild.channels.cache.get('751436248505122836');
     memberCountChannel.setName('Members: ' + memberCount)
     .then(result => console.log(result))
     .catch(error => console.log(error));
