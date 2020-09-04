@@ -11,7 +11,7 @@ client.on("ready", () => {
     setInterval(() => {
         let myGuild = client.guilds.cache.get('691557706846306385');
         let memberCount = myGuild.memberCount;
-        if(targetGuild.available) {
+        if(myGuild.available) {
             client.user.setPresence({ activity: { name: memberCount + ' people from the dark! 💜', type: 'WATCHING' }, status: 'online'  })
                   .then(console.log)
                   .catch(console.error);
