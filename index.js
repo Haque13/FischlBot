@@ -1,15 +1,11 @@
-const { Discord, Client, Util, MessageEmbed } = require("discord.js");
-const client = new Discord.Client();
+const { discord, Client, Util, MessageEmbed } = require("discord.js");
+const client = new discord.Client();
 require("dotenv").config();
-
-const bot = new Client({
-    disableMentions: "all"
-});
 
 const prefix1 = "fischl";
 const prefix2 = "oz";
 
-bot.on("ready", () => {
+client.on("ready", () => {
     console.log(`[READY] ${bot.user.tag} has been successfully booted up!`)
     bot.user.setActivity("YOU from the dark! 💜",{ type: 'WATCHING' })
     let myGuild = client.guilds.get('645116221007593502');
@@ -19,11 +15,11 @@ bot.on("ready", () => {
     .then(result => console.log(result))
     .catch(error => console.log(error));
 });
-bot.on("warn", console.warn);
-bot.on("error", console.error);
-bot.on("shardDisconnect", (event, id) => console.log(`[SHARD] Shard ${id} disconnected (${event.code}) ${event}, trying to reconnect...`));
-bot.on("shardReconnecting", (id) => console.log(`[SHARD] Shard ${id} reconnecting...`));
-bot.on("message", async (message) => { // eslint-disable-line
+client.on("warn", console.warn);
+client.on("error", console.error);
+client.on("shardDisconnect", (event, id) => console.log(`[SHARD] Shard ${id} disconnected (${event.code}) ${event}, trying to reconnect...`));
+client.on("shardReconnecting", (id) => console.log(`[SHARD] Shard ${id} reconnecting...`));
+client.on("message", async (message) => { // eslint-disable-line
     if (message.author.bot) return;
     if (!message.content.toLowerCase().startsWith(prefix1 || prefix2)) return;
 
@@ -47,4 +43,4 @@ bot.on("message", async (message) => { // eslint-disable-line
     }    
 }})
 
-bot.login(process.env.BOT_TOKEN);
+client.login(process.env.BOT_TOKEN);
