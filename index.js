@@ -42,11 +42,6 @@ client.on("message", async (message) => { // eslint-disable-line
     if (message.author.bot) return;
     if (!message.content.toLowerCase().startsWith(prefix1 + 'avatar'))
     if (!message.content.toLowerCase().startsWith(prefix2 + 'avatar')) return;
-
-    const args = message.content.split(" ");
-    const searchString = args.slice(1).join(" ");
-    const url = args[1] ? args[1].replace(/<(.+)>/g, "$1") : "";
-    
         
         let embed = new MessageEmbed(); {
     if (!message.mentions.users.first()) { 
