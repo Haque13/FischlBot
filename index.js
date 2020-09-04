@@ -11,7 +11,7 @@ const prefix2 = "oz";
 bot.on("ready", () => {
     console.log(`[READY] ${bot.user.tag} has been successfully booted up!`)
     bot.user.setActivity("YOU from the dark! 💜",{ type: 'WATCHING' })
-    let myGuild = client.guilds.get('645116221007593502');
+    let myGuild = bot.guilds.get('645116221007593502');
     let memberCount = myGuild.memberCount;
     let memberCountChannel = myGuild.channels.get('751436248505122836');
     memberCountChannel.setName('Members: ' + memberCount)
