@@ -1,5 +1,5 @@
-const { discord,MessageEmbed } = require("discord.js");
-const client = new discord.Client();
+const Discord = require("discord.js");
+const client = new Discord.Client();
 require("dotenv").config();
 
 const prefix1 = "fischl";
