@@ -5,29 +5,6 @@ const bot = new Client({
     disableMentions: "all"
 });
 
-let countChannel = {
-    total: "751436186966425720",
-    member: "751436248505122836",
-    bots: "751436334929018960",
-    serverID: "645116221007593502"
-}
-
-bot.on("guildMemberAdd"), member => {
-    if (member.guild.id !== countChannel.serverID) return;
-
-    bot.channels.cache.get(countChannel.total).setName(`Total Users: ${member.guild.memberCount}`);
-    bot.channels.cache.get(countChannel.member).setName(`Members: ${member.guild.members.cache.filter(m =>!m.user.bot).size}`);
-    bot.channels.cache.get(countChannel.bots).setName(`Bots: ${member.guild.members.cache.filter(m => m.user.bot).size}`);
-}
-
-bot.on("guildMemberRemove"), member => {
-    if (member.guild.id !== countChannel.serverID) return;
-
-    bot.channels.cache.get(countChannel.total).setName(`Total Users: ${member.guild.memberCount}`);
-    bot.channels.cache.get(countChannel.member).setName(`Members: ${member.guild.members.cache.filter(m =>!m.user.bot).size}`);
-    bot.channels.cache.get(countChannel.bots).setName(`Bots: ${member.guild.members.cache.filter(m => m.user.bot).size}`);
-}
-
 const prefix1 = "fischl";
 const prefix2 = "oz";
 
