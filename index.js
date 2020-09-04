@@ -26,10 +26,10 @@ bot.on("message", async (message) => { // eslint-disable-line
     
         
         let embed = new MessageEmbed(); {
-    if (!message.mentions.users.first()) { 
+    if (!message.mentions.users.first() + 'avatar') { 
          message.channel.send("Aku tidak bisa melakukan pemanggilan, jika tidak mengetahui siapa yg harus ku panggil!")       
 }  else {
-        let user = message.mentions.users.first();
+        let user = (message.mentions.users.first() + 'avatar');
         embed.setTitle(`${user.username}'s avatar`);
         embed.setDescription('Dengan kontrak ini, aku panggil Avatar ini dari dalam kegelapan!') || (`Links:\n[png](${user.displayAvatarURL({format: "png", size: 2048})}) | [jpg](${user.displayAvatarURL({format: "jpg", size: 2048})}) | [gif](${user.displayAvatarURL({format: "gif", size: 2048, dynamic: true})}) | [webp](${user.displayAvatarURL({format: "webp", size: 2048})})`);
         embed.setColor(0x4B0082);
