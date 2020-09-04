@@ -24,9 +24,9 @@ bot.on("message", async (message) => { // eslint-disable-line
     const searchString = args.slice(1).join(" ");
     const url = args[1] ? args[1].replace(/<(.+)>/g, "$1") : "";
     
-    {let command = message.content.toLowerCase().split(" ")[0];
+    let command = message.content.toLowerCase().split(" ")[0];
         command = !message.mentions.users.first();
-        command = command.slice(prefix1.length)};
+        command = command.slice(prefix1.length);
         
 
         let embed = new MessageEmbed();
