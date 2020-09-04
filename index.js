@@ -10,8 +10,8 @@ client.on("ready", () => {
     console.log(`[READY] ${client.user.tag} has been successfully booted up!`)
     setInterval(() => {
         targetGuild = client.guilds.cache.get('691557706846306385')
-        if(targetGuild) {
-            client.user.setPresence({ game: { name: targetGuild.memberCount + ' people verifying!', type: 'WATCHING' }, status: 'online'  })
+        if(targetGuild.available) {
+            client.user.setPresence({ activity: { name: targetGuild.memberCount + ' people verifying!', type: 'WATCHING' }, status: 'online'  })
                   .then(console.log)
                   .catch(console.error);
         }
