@@ -1,4 +1,4 @@
-const { discord, Client, Util, MessageEmbed } = require("discord.js");
+const { discord,MessageEmbed } = require("discord.js");
 const client = new discord.Client();
 require("dotenv").config();
 
