@@ -25,13 +25,14 @@ bot.on("message", async (message) => { // eslint-disable-line
     const url = args[1] ? args[1].replace(/<(.+)>/g, "$1") : "";
     
     let command = message.content.toLowerCase().split(" ")[0];
-    command = command.slice(prefix1.length);
+        command = command.slice(prefix1.length);
+    let command = message.mentions.users.first();
 
         let embed = new MessageEmbed();
     if (command === "avatar" || command === "profile") {
        (!message.mentions.users.first())
          message.channel.send("Aku tidak bisa melakukan pemanggilan, jika tidak mengetahui siapa yg harus ku panggil!")
-    } else {
+} else {
         let user = message.mentions.users.first();
         embed.setTitle(`${user.username}'s avatar`);
         embed.setDescription('Dengan kontrak ini, aku panggil Avatar ini dari dalam kegelapan!') || (`Links:\n[png](${user.displayAvatarURL({format: "png", size: 2048})}) | [jpg](${user.displayAvatarURL({format: "jpg", size: 2048})}) | [gif](${user.displayAvatarURL({format: "gif", size: 2048, dynamic: true})}) | [webp](${user.displayAvatarURL({format: "webp", size: 2048})})`);
