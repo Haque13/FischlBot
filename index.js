@@ -40,8 +40,8 @@ client.on("shardDisconnect", (event, id) => console.log(`[SHARD] Shard ${id} dis
 client.on("shardReconnecting", (id) => console.log(`[SHARD] Shard ${id} reconnecting...`));
 client.on("message", async (message) => { // eslint-disable-line
     if (message.author.bot) return;
-    if (!message.content.toLowerCase().startsWith(prefix1 + 'avatar'))
-    if (!message.content.toLowerCase().startsWith(prefix2 + 'avatar')) return;
+    if (!message.content.toLowerCase().startsWith(prefix1 + ' avatar'))
+    if (!message.content.toLowerCase().startsWith(prefix2 + ' avatar')) return;
         
         let embed = new MessageEmbed(); {
     if (!message.mentions.users.first()) { 
