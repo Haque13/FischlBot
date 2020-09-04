@@ -28,7 +28,7 @@ bot.on("message", async (message) => { // eslint-disable-line
     command = command.slice(prefix1.length);
 
         let embed = new MessageEmbed();
-    if (message.content.startsWith(prefix1 + 'avatar') || message.content.startsWith(prefix2 + 'avatar')) {
+    if (message.content.mentions.users.first.startsWith(prefix1 + 'avatar') || message.content.mentions.users.first.startsWith(prefix2 + 'avatar')) {
         message.channel.send("Aku tidak bisa melakukan pemanggilan, jika tidak mengetahui siapa yg harus ku panggil!")
     } else {
         let user = message.mentions.users.first();
