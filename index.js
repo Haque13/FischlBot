@@ -28,13 +28,13 @@ bot.on("message", async (message) => { // eslint-disable-line
     command = command.slice(prefix1.length);
 
         let embed = new MessageEmbed();
-    if (message.content.startsWith(prefix1 + 'avatar') || message.content.startsWith(prefix2 + 'avatar')) {
+    if (command === "avatar" || command === "profile") {
        (!message.mentions.users.first())
          message.channel.send("Aku tidak bisa melakukan pemanggilan, jika tidak mengetahui siapa yg harus ku panggil!")
     } else {
         let user = message.mentions.users.first();
         embed.setTitle(`${user.username}'s avatar`);
-        embed.setDescription('Dengan kontrak ini, aku panggil Avatar ini dari dalam kegelapan!') | (`Links:\n[png](${user.displayAvatarURL({format: "png", size: 2048})}) | [jpg](${user.displayAvatarURL({format: "jpg", size: 2048})}) | [gif](${user.displayAvatarURL({format: "gif", size: 2048, dynamic: true})}) | [webp](${user.displayAvatarURL({format: "webp", size: 2048})})`);
+        embed.setDescription('Dengan kontrak ini, aku panggil Avatar ini dari dalam kegelapan!') || (`Links:\n[png](${user.displayAvatarURL({format: "png", size: 2048})}) | [jpg](${user.displayAvatarURL({format: "jpg", size: 2048})}) | [gif](${user.displayAvatarURL({format: "gif", size: 2048, dynamic: true})}) | [webp](${user.displayAvatarURL({format: "webp", size: 2048})})`);
         embed.setColor(0x4B0082);
         embed.setTimestamp();
         embed.setFooter(user.username);
