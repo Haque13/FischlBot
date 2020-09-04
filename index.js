@@ -11,7 +11,13 @@ const prefix2 = "oz";
 bot.on("ready", () => {
     console.log(`[READY] ${bot.user.tag} has been successfully booted up!`)
     bot.user.setActivity("YOU from the dark! 💜",{ type: 'WATCHING' })
-  });
+    let myGuild = client.guilds.get('645116221007593502');
+    let memberCount = myGuild.memberCount;
+    let memberCountChannel = myGuild.channels.get('751436248505122836');
+    memberCountChannel.setName('Members: ' + memberCount)
+    .then(result => console.log(result))
+    .catch(error => console.log(error));
+});
 bot.on("warn", console.warn);
 bot.on("error", console.error);
 bot.on("shardDisconnect", (event, id) => console.log(`[SHARD] Shard ${id} disconnected (${event.code}) ${event}, trying to reconnect...`));
