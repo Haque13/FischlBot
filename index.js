@@ -55,7 +55,7 @@ client.on("message", async (message) => { // eslint-disable-line
         embed.setColor(0x4B0082);
         embed.setTimestamp();
         embed.setFooter(user.username);
-        embed.setImage(bot.users.cache.get(user.id).displayAvatarURL({size: 4096, dynamic: true}));
+        embed.setImage(client.users.cache.get(user.id).displayAvatarURL({size: 4096, dynamic: true}));
         message.channel.send(embed);
     }    
 }})
