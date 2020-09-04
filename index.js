@@ -9,7 +9,7 @@ const prefix2 = "oz";
 client.on("ready", () => {
     console.log(`[READY] ${client.user.tag} has been successfully booted up!`)
     setInterval(() => {
-        targetGuild = client.guilds.cache.get('691557706846306385')
+        targetGuild = client.guilds.get('691557706846306385')
         if(targetGuild.available) {
             client.user.setPresence({ activity: { name: targetGuild.memberCount + ' people from the dark! 💜', type: 'WATCHING' }, status: 'online'  })
                   .then(console.log)
