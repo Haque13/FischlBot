@@ -26,9 +26,7 @@ bot.on("message", async (message) => { // eslint-disable-line
     
     let command = message.content.toLowerCase().split(" ")[0];
         command = !message.mentions.users.first();
-        command = command.slice(prefix1.length);
         
-
         let embed = new MessageEmbed();
     if (command === "avatar" || command === "profile") {
          message.channel.send("Aku tidak bisa melakukan pemanggilan, jika tidak mengetahui siapa yg harus ku panggil!")
