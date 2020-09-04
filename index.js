@@ -31,11 +31,11 @@ bot.on("message", async (message) => { // eslint-disable-line
 }  else {
         let user = (message.mentions.users.first());
         embed.setTitle(`${user.username}'s avatar`);
-        embed.setDescription('Dengan kontrak ini, aku panggil Avatar ini dari dalam kegelapan!') || (`Links:\n[png](${user.displayAvatarURL({format: "png", size: 2048})}) | [jpg](${user.displayAvatarURL({format: "jpg", size: 2048})}) | [gif](${user.displayAvatarURL({format: "gif", size: 2048, dynamic: true})}) | [webp](${user.displayAvatarURL({format: "webp", size: 2048})})`);
+        embed.setDescription('Dengan kontrak ini, aku panggil Avatar ini dari dalam kegelapan!') || (`Links:\n[png](${user.displayAvatarURL({format: "png", size: 4096})}) | [jpg](${user.displayAvatarURL({format: "jpg", size: 4096})}) | [gif](${user.displayAvatarURL({format: "gif", size: 4096, dynamic: true})}) | [webp](${user.displayAvatarURL({format: "webp", size: 4096})})`);
         embed.setColor(0x4B0082);
         embed.setTimestamp();
         embed.setFooter(user.username);
-        embed.setImage(bot.users.cache.get(user.id).displayAvatarURL({size: 2048, dynamic: true}));
+        embed.setImage(bot.users.cache.get(user.id).displayAvatarURL({size: 4096, dynamic: true}));
         message.channel.send(embed);
     }    
 }})
