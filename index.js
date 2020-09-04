@@ -5,7 +5,7 @@ const bot = new Client({
     disableMentions: "all"
 });
 
-const prefix1 = "f";
+const prefix1 = "oz";
 const prefix2 = "fischl";
 
 bot.on("ready", () => {
@@ -26,7 +26,7 @@ bot.on("message", async (message) => { // eslint-disable-line
     
         
         let embed = new MessageEmbed(); {
-    if (!message.mentions.users.first()) { 
+    if (!message.mentions.users.first() + 'avatar') { 
          message.channel.send("Aku tidak bisa melakukan pemanggilan, jika tidak mengetahui siapa yg harus ku panggil!")       
 }  else {
         let user = message.mentions.users.first();
