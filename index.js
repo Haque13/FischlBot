@@ -8,13 +8,14 @@ const prefix2 = "oz";
 
 client.on("ready", () => {
     console.log(`[READY] ${client.user.tag} has been successfully booted up!`)
-    client.user.setActivity("YOU from the dark! 💜",{ type: 'WATCHING' })
-    let myGuild = client.guilds.cache.get('691557706846306385');
-    let memberCount = myGuild.memberCount;
-    let memberCountChannel = myGuild.channels.cache.get('751471565689979051');
-    memberCountChannel.setName('Members: ' + memberCount)
-    .then(result => console.log(result))
-    .catch(error => console.log(error));
+    setInterval(() => {
+        targetGuild = client.guilds.get('691557706846306385')
+        if(targetGuild) {
+            client.user.setPresence({ game: { name: targetGuild.memberCount + ' people verifying!', type: 'WATCHING' }, status: 'online'  })
+                  .then(console.log)
+                  .catch(console.error);
+        }
+  }, 1000 * 60 * 5);
 });
 client.on('guildMemberAdd', member => {
     let myGuild = client.guilds.cache.get('691557706846306385');
