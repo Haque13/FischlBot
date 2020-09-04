@@ -24,13 +24,13 @@ bot.on("message", async (message) => { // eslint-disable-line
     const searchString = args.slice(1).join(" ");
     const url = args[1] ? args[1].replace(/<(.+)>/g, "$1") : "";
     
-    let command = message.content.toLowerCase().split(" ")[0];
-        command = command.slice(prefix1.length);
+    {let command = message.content.toLowerCase().split(" ")[0];
         command = !message.mentions.users.first();
+        command = command.slice(prefix1.length)};
+        
 
         let embed = new MessageEmbed();
     if (command === "avatar" || command === "profile") {
-       (!message.mentions.users.first())
          message.channel.send("Aku tidak bisa melakukan pemanggilan, jika tidak mengetahui siapa yg harus ku panggil!")
 } else {
         let user = message.mentions.users.first();
