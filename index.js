@@ -16,10 +16,6 @@ client.on("ready", () => {
                   .then(console.log)
                   .catch(console.error);
         }
-        const gmember = Discord.GuildMember
-        if (gmember.guild.id !== countChannel.serverID) return;
-        client.channels.cache.get(countChannel.traveler).setName(`Travelers: ` + member.guild.roles.cache.get(roleID.Traveler).members.size);
-        client.channels.cache.get(countChannel.outlander).setName(`Outlanders: ` + member.guild.roles.cache.get(roleID.Outlanders).members.size);
   }, 1000 * 60 * 1);
 });
 
