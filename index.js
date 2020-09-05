@@ -23,15 +23,20 @@ let countChannel = {
     total: "751687607859281930",
     member: "751687686338641931",
     bots: "751687744815759413",
-    serverID: "691557706846306385"
+    serverID: "645116221007593502"
 }
 
 client.on("guildMemberAdd", member => {
-    if (member.guild.id !== countChannel.serverID) return;
-    
-    client.channels.cache.get(countChannel.total).setName(`Total Members: ${member.guild.memberCount}`);
-    client.channels.cache.get(countChannel.member).setName(`Travelers: ${member.guild.members.cache.filter(m => !m.user.bot).size}`);
-    client.channels.cache.get(countChannel.bots).setName(`Bots: ${member.guild.members.cache.filter(m => m.user.bot).size}`)
+    let myGuild = client.guild.cache.get("691557706846306385");
+    let memberCount = myGuild.memberCount;
+    let memberCountChannel = {
+        total: "751687607859281930",
+        member: "751687686338641931",
+        bots: "751687744815759413"
+    }
+    client.channels.cache.get(memberCountChannel.total).setName(`Total Members: ${memberCount}`);
+    client.channels.cache.get(memberCountChannel.member).setName(`Travelers: ${memberCount.cache.filter(m => !m.user.bot).size}`);
+    client.channels.cache.get(memberCountChannel.bots).setName(`Bots: ${memberCount.cache.filter(m => m.user.bot).size}`)
 })
 client.on("guildMemberRemove", member => {
     if (member.guild.id !== countChannel.serverID) return;
