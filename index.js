@@ -19,13 +19,6 @@ client.on("ready", () => {
   }, 1000 * 60 * 1);
 });
 
-let countChannel = {
-    total: "751687607859281930",
-    member: "751687686338641931",
-    bots: "751687744815759413",
-    serverID: "645116221007593502"
-}
-
 client.on("guildMemberAdd", member => {
     let myGuild = client.guild.cache.get("691557706846306385");
     let memberCount = myGuild.memberCount;
