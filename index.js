@@ -32,8 +32,6 @@ client.on('guildMemberAdd', member => {
     client.channels.cache.get(countChannel.total).setName(`Total Members: ${member.guild.memberCount}`);
     client.channels.cache.get(countChannel.member).setName(`Travelers: ${member.guild.members.cache.filter(m => !m.user.bot).size}`);
     client.channels.cache.get(countChannel.bots).setName(`Bots: ${member.guild.members.cache.filter(m => m.user.bot).size}`)
-    .then(result => console.log(result))
-    .catch(error => console.log(error));
 })
 client.on('guildMemberRemove', member => {
     if (member.guild.id !== countChannel.serverID) return;
@@ -41,8 +39,6 @@ client.on('guildMemberRemove', member => {
     client.channels.cache.get(countChannel.total).setName(`Total Members: ${member.guild.memberCount}`);
     client.channels.cache.get(countChannel.member).setName(`Travelers: ${member.guild.members.cache.filter(m => !m.user.bot).size}`);
     client.channels.cache.get(countChannel.bots).setName(`Bots: ${member.guild.members.cache.filter(m => m.user.bot).size}`)
-    .then(result => console.log(result))
-    .catch(error => console.log(error));
 })
 client.on("warn", console.warn);
 client.on("error", console.error);
