@@ -21,27 +21,45 @@ client.on("ready", () => {
 
 let countChannel = {
     total: "751687607859281930",
-    member: "751687686338641931",
+    traveler: "751687686338641931",
     bots: "751687744815759413",
     FCBT: "751711276379406417",
+    CBT2: "751718102097592412",
+    outlander: "751719923738214480",
     serverID: "691557706846306385"
 }
-let roleID = "725413894990069872"
+let roleID = {
+    FCBT: "725413894990069872",
+    CBT2: "691560366047756369",
+    Traveler: "691558060820529162",
+    Outlanders: "746965972501659680",
+    Android: "691563805741678612",
+    iOS: "691563744194461726",
+    PC: "691563805729357844",
+    PS4: "717784756531757077",
+    Switch: "717836707281502398"
+}
 client.on("guildMemberAdd", member => {
     if (member.guild.id !== countChannel.serverID) return;
-    
+    setInterval(() => {
     client.channels.cache.get(countChannel.total).setName(`Total Members: ${member.guild.memberCount}`);
-    client.channels.cache.get(countChannel.member).setName(`Travelers: ${member.guild.members.cache.filter(m => !m.user.bot).size}`);
+    client.channels.cache.get(countChannel.traveler).setName(`Travelers: ` + member.guild.roles.cache.get(roleID.Traveler).members.size);
+    client.channels.cache.get(countChannel.outlander).setName(`Outlanders: ` + member.guild.roles.cache.get(roleID.Outlanders).members.size);
     client.channels.cache.get(countChannel.bots).setName(`Bots: ${member.guild.members.cache.filter(m => m.user.bot).size}`)
-    client.channels.cache.get(countChannel.FCBT).setName(`Final CBT: ` + member.guild.roles.cache.get(roleID).members.size);
+    client.channels.cache.get(countChannel.FCBT).setName(`Final CBT: ` + member.guild.roles.cache.get(roleID.FCBT).members.size);
+    client.channels.cache.get(countChannel.CBT2).setName(`CBT2: ` + member.guild.roles.cache.get(roleID.CBT2).members.size);
+}, 1000 * 60 * 1);
 })
 client.on("guildMemberRemove", member => {
     if (member.guild.id !== countChannel.serverID) return;
-    
+    setInterval(() => {
     client.channels.cache.get(countChannel.total).setName(`Total Members: ${member.guild.memberCount}`);
-    client.channels.cache.get(countChannel.member).setName(`Travelers: ${member.guild.members.cache.filter(m => !m.user.bot).size}`);
+    client.channels.cache.get(countChannel.traveler).setName(`Travelers: ` + member.guild.roles.cache.get(roleID.Traveler).members.size);
+    client.channels.cache.get(countChannel.outlander).setName(`Outlanders: ` + member.guild.roles.cache.get(roleID.Outlanders).members.size);
     client.channels.cache.get(countChannel.bots).setName(`Bots: ${member.guild.members.cache.filter(m => m.user.bot).size}`)
-    client.channels.cache.get(countChannel.FCBT).setName(`Final CBT: ` + member.guild.roles.cache.get(roleID).members.size);
+    client.channels.cache.get(countChannel.FCBT).setName(`Final CBT: ` + member.guild.roles.cache.get(roleID.FCBT).members.size);
+    client.channels.cache.get(countChannel.CBT2).setName(`CBT2: ` + member.guild.roles.cache.get(roleID.CBT2).members.size);
+}, 1000 * 60 * 1);
 })
 client.on("warn", console.warn);
 client.on("error", console.error);
