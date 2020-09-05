@@ -27,7 +27,7 @@ client.on("guildMemberAdd", member => {
         member: "751687686338641931",
         bots: "751687744815759413"
     }
-    myGuild.channels.cache.get(memberCountChannel.total).setName(`Total Members: ${memberCount}`);
+    myGuild.channels.cache.get(memberCountChannel.total).setName('Total Members: ' + memberCount);
     myGuild.channels.cache.get(memberCountChannel.member).setName(`Travelers: ${memberCount.cache.filter(m => !m.user.bot).size}`);
     myGuild.channels.cache.get(memberCountChannel.bots).setName(`Bots: ${memberCount.cache.filter(m => m.user.bot).size}`)
 })
