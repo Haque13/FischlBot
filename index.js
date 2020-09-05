@@ -20,9 +20,9 @@ client.on("ready", () => {
 });
 
 let countChannel = {
-    total: "751680646358892595",
-    member: "751680546450571303",
-    bots: "751680780601917473",
+    total: "751687607859281930",
+    member: "751687686338641931",
+    bots: "751687744815759413",
     serverID: "691557706846306385"
 }
 client.on('guildMemberAdd', member => {
