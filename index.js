@@ -18,25 +18,21 @@ client.on("ready", () => {
         }
   }, 1000 * 60 * 1);
 });
-
-client.on("guildMemberAdd", member => {
-    let myGuild = client.guild.cache.get("691557706846306385");
+client.on('guildMemberAdd', member => {
+    let myGuild = client.guilds.cache.get('691557706846306385');
     let memberCount = myGuild.memberCount;
-    let memberCountChannel = {
-        total: "751687607859281930",
-        member: "751687686338641931",
-        bots: "751687744815759413"
-    }
-    myGuild.channels.cache.get(memberCountChannel.total).setName('Total Members: ' + memberCount);
-    myGuild.channels.cache.get(memberCountChannel.member).setName(`Travelers: ${memberCount.cache.filter(m => !m.user.bot).size}`);
-    myGuild.channels.cache.get(memberCountChannel.bots).setName(`Bots: ${memberCount.cache.filter(m => m.user.bot).size}`)
+    let memberCountChannel = myGuild.channels.cache.get('751471565689979051');
+    memberCountChannel.setName('Members: ' + memberCount)
+    .then(result => console.log(result))
+    .catch(error => console.log(error));
 })
-client.on("guildMemberRemove", member => {
-    if (member.guild.id !== countChannel.serverID) return;
-    
-    client.channels.cache.get(countChannel.total).setName(`Total: ${member.guild.memberCount}`);
-    client.channels.cache.get(countChannel.member).setName(`Travelers: ${member.guild.members.cache.filter(m => !m.user.bot).size}`);
-    client.channels.cache.get(countChannel.bots).setName(`Bots: ${member.guild.members.cache.filter(m => m.user.bot).size}`)
+client.on('guildMemberRemove', member => {
+    let myGuild = client.guilds.cache.get('691557706846306385');
+    let memberCount = myGuild.memberCount;
+    let memberCountChannel = myGuild.channels.cache.get('751471565689979051');
+    memberCountChannel.setName('Members: ' + memberCount)
+    .then(result => console.log(result))
+    .catch(error => console.log(error));
 })
 client.on("warn", console.warn);
 client.on("error", console.error);
