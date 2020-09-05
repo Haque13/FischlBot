@@ -36,7 +36,7 @@ client.on("guildMemberAdd", member => {
 client.on("guildMemberRemove", member => {
     if (member.guild.id !== countChannel.serverID) return;
     
-    client.channels.cache.get(countChannel.total).setName(`Total Members: ${member.guild.memberCount}`);
+    client.channels.cache.get(countChannel.total).setName(`Total: ${member.guild.memberCount}`);
     client.channels.cache.get(countChannel.member).setName(`Travelers: ${member.guild.members.cache.filter(m => !m.user.bot).size}`);
     client.channels.cache.get(countChannel.bots).setName(`Bots: ${member.guild.members.cache.filter(m => m.user.bot).size}`)
 })
